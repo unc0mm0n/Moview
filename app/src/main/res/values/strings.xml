@@ -1,5 +1,7 @@
 <resources>
     <string name="app_name">Moview</string>
-    <string name="hello_world">Hello world!</string>
+
+    <string name="welcome_screen">Welcome! Movie info is being loaded as we speak.</string>
+
     <string name="action_settings">Settings</string>
 </resources>
