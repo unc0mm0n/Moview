@@ -28,16 +28,27 @@ public class MovieDetailActivityFragment extends Fragment {
 
         Intent movieIntent = getActivity().getIntent();
         ImageView posterImageView = (ImageView) rootView.findViewById(R.id.detail_poster_image);
+
+        TextView titleTextView = (TextView) rootView.findViewById(R.id.detail_title_text);
+        TextView releaseDateTextView = (TextView) rootView.findViewById(R.id.detail_release_date_text);
+        TextView ratingTextView = (TextView) rootView.findViewById(R.id.detail_rating_text);
         TextView mainTextView = (TextView) rootView.findViewById(R.id.detail_main_text);
 
         if (!movieIntent.hasExtra(Intent.EXTRA_SUBJECT)) {
             Log.w(LOG_TAG, getString(R.string.warning_no_item));
+            titleTextView.setText("");
             mainTextView.setText(getString(R.string.warning_no_item));
             return rootView;
         }
 
         TmdbMovie movie = movieIntent.getParcelableExtra(Intent.EXTRA_SUBJECT);
-        Picasso.with(getActivity()).load(movie.toString()).into(posterImageView);
+
+        Picasso.with(getActivity()).load(movie.getLargePosterUrl()).into(posterImageView);
+        titleTextView.setText(movie.getTitle());
+        releaseDateTextView.append(movie.getReleaseDate());
+        ratingTextView.append(String.valueOf(movie.getRating()));
+        mainTextView.append(movie.getSynopsis());
+
         return rootView;
     }
 }

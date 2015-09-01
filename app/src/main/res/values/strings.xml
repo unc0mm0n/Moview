@@ -1,12 +1,17 @@
 <resources>
     <string name="app_name">Moview</string>
 
-    <string name="welcome_screen">Welcome! Movie info is being loaded as we speak.</string>
+    <string name="welcome_screen">Welcome! Movie information is being loaded for you.</string>
     <string name="hello_world">Hello world!</string>
+    <string name="release_date">Release Date:&#160;</string>
+    <string name="rating">Rating:&#160;</string>
+    <string name="synopsis">Synopsis:&#160;</string>
 
     <string name="action_settings">Settings</string>
     <string name="title_activity_movie_detail">Movie Details</string>
 
     <string name="warning_no_item">Warning: No item received </string>
+
+    <string name="content_poster_image">Poster Image</string>
 
 </resources>
