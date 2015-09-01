@@ -1,5 +1,6 @@
 package yuval.practice.moview;
 
+import android.content.Intent;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -8,6 +9,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.TextView;
 
@@ -42,6 +44,15 @@ public class MainActivityFragment extends Fragment {
 
         mMoviesAdapter = new PicassoImageAdapter<>(getActivity());
         moviesGridView.setAdapter(mMoviesAdapter);
+
+        moviesGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent posterClickIntent = new Intent(getActivity(), MovieDetailActivity.class);
+                posterClickIntent.putExtra(Intent.EXTRA_SUBJECT, mMoviesAdapter.getItem(position));
+                startActivity(posterClickIntent);
+            }
+        });
 
         MovieFetchTask movieFetchTask = new MovieFetchTask();
         movieFetchTask.execute();
