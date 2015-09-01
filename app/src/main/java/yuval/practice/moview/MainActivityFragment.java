@@ -2,14 +2,14 @@ package yuval.practice.moview;
 
 import android.net.Uri;
 import android.os.AsyncTask;
-import android.support.v4.app.Fragment;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.GridView;
+import android.widget.TextView;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -42,12 +42,6 @@ public class MainActivityFragment extends Fragment {
 
         mMoviesAdapter = new PicassoImageAdapter<>(getActivity());
         moviesGridView.setAdapter(mMoviesAdapter);
-        moviesGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                
-            }
-        });
 
         MovieFetchTask movieFetchTask = new MovieFetchTask();
         movieFetchTask.execute();
@@ -65,6 +59,8 @@ public class MainActivityFragment extends Fragment {
         @Override
         protected void onPostExecute(TmdbMovie[] tmdbMovies) {
             mMoviesAdapter.addAll(tmdbMovies);
+            TextView welcomeText = (TextView) getActivity().findViewById(R.id.main_welcome_text);
+            welcomeText.setText("");
         }
 
         @Override
@@ -77,7 +73,7 @@ public class MainActivityFragment extends Fragment {
             // Will contain the raw JSON response as a string.
             String movieJsonStr = null;
 
-            Uri.Builder urlBuilder = Uri.parse(getString(R.string.tmbd_discover_url))
+            Uri.Builder urlBuilder = Uri.parse(getString(R.string.tmdb_discover_url))
                     .buildUpon()
                     .appendQueryParameter("api_key", getString(R.string.tmdb_api_key));
 
@@ -149,14 +145,9 @@ public class MainActivityFragment extends Fragment {
             JSONArray jsonMovieArray = jsonData.getJSONArray("results");
 
             TmdbMovie[] tmdbMovies = new TmdbMovie[jsonMovieArray.length()];
-            Uri url;
             for (int i = 0; i < jsonMovieArray.length(); i++) {
                 JSONObject movie = jsonMovieArray.getJSONObject(i);
-                url = Uri.parse(getString(R.string.tmbd_poster_url)
-                        + movie.getString("poster_path"));
-
-                tmdbMovies[i] = new TmdbMovie( Integer.valueOf(movie.getString("id")),
-                        url.toString());
+                tmdbMovies[i] = new TmdbMovie(movie);
             }
             return tmdbMovies;
         }

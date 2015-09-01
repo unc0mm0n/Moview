@@ -8,12 +8,14 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text ="@string/welcome_screen" />
+        android:text ="@string/welcome_screen"
+        android:id = "@+id/main_welcome_text"/>
     <GridView
         android:layout_width="fill_parent"
         android:layout_height="match_parent"
-        android:numColumns="5"
-        android:verticalSpacing="1dp"
+        android:numColumns="3"
+        android:verticalSpacing="5dp"
+        android:horizontalSpacing="5dp"
         android:gravity="center"
         android:id="@+id/main_poster_grid"
         />

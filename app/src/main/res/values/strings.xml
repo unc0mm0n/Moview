@@ -4,4 +4,6 @@
     <string name="welcome_screen">Welcome! Movie info is being loaded as we speak.</string>
 
     <string name="action_settings">Settings</string>
+    <string name="title_activity_movie_detail">MovieDetailActivity</string>
+    <string name="hello_world">Hello world!</string>
 </resources>

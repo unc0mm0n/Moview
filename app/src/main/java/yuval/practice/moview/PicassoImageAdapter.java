@@ -8,6 +8,10 @@ import android.widget.ImageView;
 
 import com.squareup.picasso.Picasso;
 
+/**
+ * An ArrayAdapter built to populate images using Picasso.
+ * @param <T> Image object where T.toString() returns the path to the Image.
+ */
 public class PicassoImageAdapter<T> extends ArrayAdapter<T> {
 
     protected Context mContext;
