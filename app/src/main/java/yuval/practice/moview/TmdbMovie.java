@@ -1,6 +1,8 @@
 package yuval.practice.moview;
 
 import android.net.Uri;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.util.Log;
 
 import org.json.JSONException;
@@ -9,7 +11,7 @@ import org.json.JSONObject;
 /**
  * Class to hold Movie Info from The Movie Database (themoviedb.org)
  */
-public class TmdbMovie {
+public class TmdbMovie implements Parcelable {
     private static final String TMDB_POSTER_URL= "http://image.tmdb.org/3/t/p/w185/";
     private final String LOG_TAG = TmdbMovie.class.getSimpleName();
     private int id;
@@ -40,6 +42,23 @@ public class TmdbMovie {
         this.id = id;
     }
 
+    protected TmdbMovie(Parcel in) {
+        id = in.readInt();
+        posterUrl = in.readString();
+    }
+
+    public static final Creator<TmdbMovie> CREATOR = new Creator<TmdbMovie>() {
+        @Override
+        public TmdbMovie createFromParcel(Parcel in) {
+            return new TmdbMovie(in);
+        }
+
+        @Override
+        public TmdbMovie[] newArray(int size) {
+            return new TmdbMovie[size];
+        }
+    };
+
     /**
      *
      * @return Movie ID.
@@ -55,5 +74,17 @@ public class TmdbMovie {
     @Override
     public String toString() {
         return posterUrl;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(id);
+        dest.writeString(posterUrl);
+
     }
 }
